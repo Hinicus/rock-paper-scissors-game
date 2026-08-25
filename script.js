@@ -1,0 +1,106 @@
+console.log("Hello Word!");
+//JAVASCRIPT ROCK, PAPER, SCISSORS!
+//Initialize variables (Human score and Computer score)
+//Get the computer choice that returns Rock, paper, scissors
+//Get the human choice
+//Check the condition for each round: scissors beats paper, paper beats rock, rock beats scissors
+
+function getComputerChoice() {
+  let computerChoice = Math.floor(Math.random() * 3 + 1); //Generate a number between 0 to 4 and floor rounding.
+  //evaluate computerChoice to return either rock, paper, scissors
+  switch (computerChoice) {
+    case 1:
+      return "rock";
+      break;
+    case 2:
+      return "paper";
+      break;
+    case 3:
+      return "scissors";
+      break;
+    default:
+      "Error! Number is greater than 4 or less than 1";
+  }
+}
+/* //Test code for determining how to generate numbers at a specific range
+let randomNum = Math.random();
+console.log(randomNum);
+let testRandom = Math.floor(randomNum * 3 + 1);
+console.log(testRandom);
+*/
+function getHumanChoice() {
+  let humanChoice = prompt("Choose (Rock, Paper, Scissors): ");
+
+  return humanChoice;
+}
+
+function playGame() {
+  //Score tracking variables
+  let humanScore = 0;
+  let computerScore = 0;
+
+  //for loop for playing the game 5 rounds
+  for (let i = 0; i < 5; i++) {
+    //Get the choice
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+  }
+
+  //Declare winner
+  //Human wins
+  if (humanScore > computerScore) {
+    console.log(
+      "The human wins! Final Score: \nComputer: " +
+        computerScore +
+        "\n" +
+        "Human: " +
+        humanScore,
+    );
+    //Computer Wins
+  } else if (computerScore > humanScore) {
+    console.log(
+      "The computer wins! Final Score: \n Computer: " +
+        computerScore +
+        "\n" +
+        "Human: " +
+        humanScore,
+    );
+  } else {
+    //scores are tied
+    console.log(
+      "It's a Tie!!! Final Score: \n Computer: " +
+        computerScore +
+        "\n" +
+        "Human: " +
+        humanScore,
+    );
+  }
+
+  function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase(); //sets case-insensitivity
+    //Evaluating each plays
+    if (humanChoice == "scissors" && computerChoice == "paper") {
+      //scissors beats paper
+      console.log("You win! " + humanChoice + " beats " + computerChoice);
+      humanScore++;
+    } else if (humanChoice == "paper" && computerChoice == "rock") {
+      //paper beats rock
+      console.log("You win! " + humanChoice + " beats " + computerChoice);
+      humanScore++;
+    } else if (humanChoice == "rock" && computerChoice == "scissors") {
+      //rock beats scissors
+      console.log("You win! " + humanChoice + " beats " + computerChoice);
+      humanScore++;
+    } else if (humanChoice === computerChoice) {
+      //incase of a tie
+      console.log("TIE!!!");
+    } else {
+      //computer wins
+      console.log("You Lose! " + computerChoice + " beats " + humanChoice);
+      computerScore++;
+    }
+  }
+}
+//Play rock paper scissors
+playGame();
