@@ -11,13 +11,10 @@ function getComputerChoice() {
   switch (computerChoice) {
     case 1:
       return "rock";
-      break;
     case 2:
       return "paper";
-      break;
     case 3:
       return "scissors";
-      break;
     default:
       "Error! Number is greater than 4 or less than 1";
   }
