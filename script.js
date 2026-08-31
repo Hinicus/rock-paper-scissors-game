@@ -28,7 +28,11 @@ rpsButton.forEach((button) => {
     numberOfRounds++;
 
     if (numberOfRounds === 5) {
+      //winner found, reset all counts
       playGame(humanScore, computerScore);
+      numberOfRounds = 0;
+      humanScore = 0;
+      computerScore = 0;
     }
   });
 });
@@ -49,58 +53,56 @@ function getComputerChoice() {
 }
 
 function playGame(humanScore, computerScore) {
-  //Declare winne1 if (numberOfRounds === 5) {
+  let para = document.getElementById("overall-winner");
   //Human wins
   if (humanScore > computerScore) {
-    console.log(
+    para.textContent =
       "The human wins! Final Score: \nComputer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
+      computerScore +
+      "\n" +
+      "Human: " +
+      humanScore;
     //Computer Wins
   } else if (computerScore > humanScore) {
-    console.log(
+    para.textContent =
       "The computer wins! Final Score: \n Computer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
+      computerScore +
+      "\n" +
+      "Human: " +
+      humanScore;
   } else {
     //scores are tied
-    console.log(
+    para.textContent =
       "It's a Tie!!! Final Score: \n Computer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
+      computerScore +
+      "\n" +
+      "Human: " +
+      humanScore;
   }
 }
 
 function playRound(humanChoice, computerChoice) {
+  let para = document.getElementById("round-winner");
   humanChoice = humanChoice.toLowerCase(); //sets case-insensitivity
   //Evaluating each plays
   if (humanChoice == "scissors" && computerChoice == "paper") {
     //scissors beats paper
-    console.log("You win! " + humanChoice + " beats " + computerChoice);
+    para.textContent = "You win! " + humanChoice + " beats " + computerChoice;
     return "winner";
   } else if (humanChoice == "paper" && computerChoice == "rock") {
     //paper beats rock
-    console.log("You win! " + humanChoice + " beats " + computerChoice);
+    para.textContent = "You win! " + humanChoice + " beats " + computerChoice;
     return "winner";
   } else if (humanChoice == "rock" && computerChoice == "scissors") {
     //rock beats scissors
-    console.log("You win! " + humanChoice + " beats " + computerChoice);
+    para.textContent = "You win! " + humanChoice + " beats " + computerChoice;
     return "winner";
   } else if (humanChoice === computerChoice) {
     //incase of a tie
-    console.log("TIE!!!");
+    para.textContent = "TIE!!!";
   } else {
     //computer wins
-    console.log("You Lose! " + computerChoice + " beats " + humanChoice);
+    para.textContent = "You Lose! " + computerChoice + " beats " + humanChoice;
     return "loser";
   }
 }
