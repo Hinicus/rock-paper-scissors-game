@@ -5,6 +5,21 @@ console.log("Hello Word!");
 //Get the human choice
 //Check the condition for each round: scissors beats paper, paper beats rock, rock beats scissors
 
+//Get reference of the buttons
+let rpsButton = document.querySelectorAll("button");
+let numberOfRounds = 1;
+
+//Using forEach () to only use one event listener
+rpsButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    playGame(
+      button.getAttribute("id").toLowerCase(),
+      getComputerChoice(),
+      numberOfRounds++,
+    );
+  });
+});
+
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3 + 1); //Generate a number between 0 to 4 and floor rounding.
   //evaluate computerChoice to return either rock, paper, scissors
@@ -19,59 +34,45 @@ function getComputerChoice() {
       "Error! Number is greater than 4 or less than 1";
   }
 }
-/* //Test code for determining how to generate numbers at a specific range
-let randomNum = Math.random();
-console.log(randomNum);
-let testRandom = Math.floor(randomNum * 3 + 1);
-console.log(testRandom);
-*/
-function getHumanChoice() {
-  let humanChoice = prompt("Choose (Rock, Paper, Scissors): ");
 
-  return humanChoice;
-}
-
-function playGame() {
+function playGame(choiceHuman, choiceComputer, numberOfRounds) {
   //Score tracking variables
   let humanScore = 0;
   let computerScore = 0;
 
-  //for loop for playing the game 5 rounds
-  for (let i = 0; i < 5; i++) {
-    //Get the choice
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-  }
+  playRound(choiceHuman, choiceComputer);
+  console.log(humanScore);
 
   //Declare winner
-  //Human wins
-  if (humanScore > computerScore) {
-    console.log(
-      "The human wins! Final Score: \nComputer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
-    //Computer Wins
-  } else if (computerScore > humanScore) {
-    console.log(
-      "The computer wins! Final Score: \n Computer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
-  } else {
-    //scores are tied
-    console.log(
-      "It's a Tie!!! Final Score: \n Computer: " +
-        computerScore +
-        "\n" +
-        "Human: " +
-        humanScore,
-    );
+  if (numberOfRounds === 5) {
+    //Human wins
+    if (humanScore > computerScore) {
+      console.log(
+        "The human wins! Final Score: \nComputer: " +
+          computerScore +
+          "\n" +
+          "Human: " +
+          humanScore,
+      );
+      //Computer Wins
+    } else if (computerScore > humanScore) {
+      console.log(
+        "The computer wins! Final Score: \n Computer: " +
+          computerScore +
+          "\n" +
+          "Human: " +
+          humanScore,
+      );
+    } else {
+      //scores are tied
+      console.log(
+        "It's a Tie!!! Final Score: \n Computer: " +
+          computerScore +
+          "\n" +
+          "Human: " +
+          humanScore,
+      );
+    }
   }
 
   function playRound(humanChoice, computerChoice) {
@@ -99,5 +100,3 @@ function playGame() {
     }
   }
 }
-//Play rock paper scissors
-playGame();
